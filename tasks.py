@@ -13,6 +13,12 @@ def deploy(c):
     c.run('sls deploy')
 
 
+@task
+def remove(c):
+    """>> Remove serverless application"""
+    c.run('sls remove')
+
+
 def log(severity, message):
     assert severity in ('debug', 'info', 'error', 'warning')
 
@@ -38,6 +44,7 @@ serverless = Collection('serverless')
 
 local.add_task(autopep8, 'autopep8')
 serverless.add_task(deploy, 'deploy')
+serverless.add_task(remove, 'remove')
 
 ns.add_collection(local)
 ns.add_collection(serverless)
