@@ -1,0 +1,46 @@
+service: poc
+
+frameworkVersion: "2"
+
+custom:
+  maintainer: three
+  description: "Serverless application POC"
+
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: prod
+  region: us-east-1
+  timeout: 900
+  logRetentionInDays: 14
+
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource: "*"
+
+
+  stackTags:
+    DEPLOYMENT_TOOL: sls
+    MAINTAINER: ${self:custom.maintainer}
+    DESCRIPTION: ${self:custom.description}
+    APPLICATION: poc
+
+package:
+  individually: true
+
+functions:
+  create_s3_bucket:
+    description: Create AWS S3 bucket
+    handler: create_s3_bucket/handler.create_s3_bucket
+    memorySize: 128
+    environment:
+      LOG_LEVEL: DEBUG
+    package:
+      exclude:
+        - "**"
+      include:
+        - create_s3_bucket/handler.py
