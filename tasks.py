@@ -27,7 +27,7 @@ def log(severity, message):
 
 @task
 def autopep8(c):
-    """>> Run autocorrection on python files."""
+    """>> Run autocorrection on python files"""
     log('warning', ">> Autocorrect python files according to styleguide")
     c.run("autopep8 --in-place --max-line-length 200 --aggressive *.py --verbose")
 
