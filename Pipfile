@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 
 [dev-packages]
-invoke = "*"
+invoke = "==1.4.1"
 
 [requires]
 python_version = "3.9"
