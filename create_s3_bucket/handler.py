@@ -4,7 +4,7 @@ import json
 def create_s3_bucket(event, context):
     body = {
         "input": event,
-        "context": type(context)
+        "context": str(type(context))
     }
 
     return {
