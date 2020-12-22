@@ -6,7 +6,6 @@ custom:
   maintainer: three
   description: "Serverless application POC"
 
-
 provider:
   name: aws
   runtime: python3.8
