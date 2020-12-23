@@ -4,6 +4,10 @@ import boto3
 
 
 def create_s3_bucket(event, _context):
+    """
+    Payload example:
+        --data '{"region": "us-east-1", "bucket_name": "uniq_named_bucket"}'
+    """
     def log(severity, message):
         Logger(name='__name__').__getattribute__(severity)(message)
 
