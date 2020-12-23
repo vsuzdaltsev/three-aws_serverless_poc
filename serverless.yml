@@ -6,7 +6,6 @@ custom:
   maintainer: three
   description: "Serverless application POC"
   mgmt_region: us-east-1
-  account: "#{AWS::AccountId}"
 
 provider:
   name: aws
@@ -70,4 +69,3 @@ functions:
 
 plugins:
   - serverless-step-functions
-  - serverless-pseudo-parameters
