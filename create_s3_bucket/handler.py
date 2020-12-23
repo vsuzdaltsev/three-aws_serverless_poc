@@ -10,9 +10,11 @@ def create_s3_bucket(event, _context):
     def create(region, bucket_name):
         try:
             if region in [None, 'us-east-1']:
+                log("warning", f">> Use default location ('us-east-1') for {bucket_name}")
                 client = boto3.client('s3')
                 client.create_bucket(Bucket=bucket_name)
             else:
+                log("warning", f">> Use {region} location for {bucket_name}")
                 client = boto3.client('s3', region_name=region)
                 location = {'LocationConstraint': region}
                 client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
