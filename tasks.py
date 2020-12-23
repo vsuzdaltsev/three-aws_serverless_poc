@@ -9,25 +9,23 @@ def lambdas():
 
 @task
 def deploy(c):
-    """>> Deploy serverless application"""
+    """>> Deploy serverless application."""
     c.run('sls deploy')
 
 
 @task
 def remove(c):
-    """>> Remove serverless application"""
+    """>> Remove serverless application."""
     c.run('sls remove')
 
 
 def log(severity, message):
-    assert severity in ('debug', 'info', 'error', 'warning')
-
     Logger(name='__name__').__getattribute__(severity)(message)
 
 
 @task
 def autopep8(c):
-    """>> Run autocorrection on python files"""
+    """>> Run autocorrection on python files."""
     log('warning', ">> Autocorrect python files according to styleguide")
     c.run("autopep8 --in-place --max-line-length 200 --aggressive *.py --verbose")
 
