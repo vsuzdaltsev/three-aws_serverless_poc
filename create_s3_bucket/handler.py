@@ -46,8 +46,5 @@ def create_s3_bucket(event, _context):
     return {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Origin": '*'
-        },
         "body": json.dumps(body)
     }
