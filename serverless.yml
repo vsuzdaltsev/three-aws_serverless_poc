@@ -5,12 +5,14 @@ frameworkVersion: "2"
 custom:
   maintainer: three
   description: "Serverless application POC"
+  mgmt_region: us-east-1
+  account: "#{AWS::AccountId}"
 
 provider:
   name: aws
   runtime: python3.8
   stage: prod
-  region: us-east-1
+  region: ${self:custom.mgmt_region}
   timeout: 900
   logRetentionInDays: 14
   iamRoleStatements:
@@ -23,6 +25,8 @@ provider:
     MAINTAINER: ${self:custom.maintainer}
     DESCRIPTION: ${self:custom.description}
     APPLICATION: poc
+  apiKeys:
+    - ${self:service}-api-key
 
 package:
   individually: true
@@ -31,11 +35,11 @@ functions:
   create_s3_bucket:
     description: Create AWS S3 bucket
     handler: create_s3_bucket/handler.create_s3_bucket
-    events:
-      - http:
-          path: ${self:service}/create_s3_bucket
-          method: POST
-          private: true
+#    events:
+#      - http:
+#          path: ${self:service}/create_s3_bucket
+#          method: POST
+#          private: true
     memorySize: 128
     environment:
       LOG_LEVEL: DEBUG
@@ -59,3 +63,37 @@ functions:
 
 plugins:
   - serverless-step-functions
+  - serverless-pseudo-parameters
+stepFunctions:
+  stateMachines:
+    poc:
+      events:
+        - http:
+            path: poc/actions
+            method: POST
+            private: true
+      definition:
+        StartAt: PassInputParameters
+        Comment: "POC for a serverless application uploading files into AWS S3 bucket"
+        States:
+          PassInputParameters:
+            Type: Pass
+            ResultPath: "$"
+            Next: Actions
+          Actions:
+            Type: Choice
+            Choices:
+              - Variable: "$.action"
+                StringEquals: create_s3_bucket
+                Next: CreateS3Bucket
+              - Variable: "$.action"
+                StringEquals: upload_to_s3_bucket
+                Next: UploadToS3Bucket
+          CreateS3Bucket:
+            Type: Task
+            Resource: arn:aws:lambda:${self:custom.mgmt_region}:${self:custom.account}:function:vdc-prod-process_aws_aggregated_data
+            End: true
+          UploadToS3Bucket:
+            Type: Task
+            Resource: arn:aws:lambda:${self:custom.mgmt_region}:${self:custom.account}:function:vdc-prod-process_azure_aggregated_data
+            End: true
