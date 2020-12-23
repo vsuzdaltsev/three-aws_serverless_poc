@@ -19,4 +19,4 @@ def upload_to_s3_bucket(event, _context):
         }
     )
 
-    return {"upload_url": presigned_url}
+    return {"upload_url": presigned_url, "expires": presigned_url.split("=")[-1]}
