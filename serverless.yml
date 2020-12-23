@@ -40,5 +40,17 @@ functions:
       include:
         - create_s3_bucket/handler.py
 
+  upload_to_s3_bucket:
+    description: Generate presigned URL for uploading object to given AWS S3 bucket
+    handler: upload_to_s3_bucket/handler.upload_to_s3_bucket
+    memorySize: 128
+    environment:
+      LOG_LEVEL: DEBUG
+    package:
+      exclude:
+        - "**"
+      include:
+        - upload_to_s3_bucket/handler.py
+
 plugins:
   - serverless-step-functions
