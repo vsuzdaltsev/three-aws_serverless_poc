@@ -1,10 +1,17 @@
 from logging import Logger
 
 from invoke import task, Collection
+import yaml
 
 
 def lambdas():
     return ['create_s3_bucket']
+
+
+def sls_config(key):
+    with open('serverless.yml', 'r') as config:
+        file = config.read()
+        return yaml.safe_load(file).get(key)
 
 
 @task
@@ -36,6 +43,17 @@ def autopep8(c):
             c.run("autopep8 --in-place --recursive . --max-line-length 200 --aggressive --verbose")
 
 
+@task
+def install_dependencies(c):
+    plugins = sls_config('plugins')
+
+    def install_sls_plugin(plugin):
+        log("warning", f">> Install dependencies: {plugin}")
+        c.run(f"sls plugin install --name {plugin}")
+
+    list(map(lambda p: install_sls_plugin(p), plugins))
+
+
 ns = Collection()
 local = Collection('local')
 serverless = Collection('serverless')
@@ -43,6 +61,7 @@ serverless = Collection('serverless')
 local.add_task(autopep8, 'autopep8')
 serverless.add_task(deploy, 'deploy')
 serverless.add_task(remove, 'remove')
+serverless.add_task(install_dependencies, 'install_dependencies')
 
 ns.add_collection(local)
 ns.add_collection(serverless)
