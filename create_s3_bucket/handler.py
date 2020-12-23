@@ -29,7 +29,7 @@ def create_s3_bucket(event, _context):
 
     return {
         "status_code": 200,
-        "body": event,
+        "input": event,
         "created": created,
         "error": error
     }
