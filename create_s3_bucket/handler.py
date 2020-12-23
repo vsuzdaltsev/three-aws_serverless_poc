@@ -6,6 +6,9 @@ import boto3
 
 def create_s3_bucket(event, _context):
     region = event['region']
+    if region == 'us-eat-1':
+        region = None
+
     bucket_name = event['bucket_name']
 
     def log(severity, message):
@@ -13,7 +16,7 @@ def create_s3_bucket(event, _context):
 
     def create():
         try:
-            if not region:
+            if region is None:
                 s3_client = boto3.client('s3')
                 s3_client.create_bucket(Bucket=bucket_name)
             else:
@@ -22,11 +25,13 @@ def create_s3_bucket(event, _context):
                 s3_client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
         except BaseException as err:
             log("error", f">> Failed while creating s3 bucket {bucket_name}. Error: {err}")
-            return False
-        return True
+            return False, str(err)
+        return True, None
 
+    created, error = create()
     return {
         "status_code": 200,
-        "body": json.dumps(event),
-        "created": create()
+        "body": event,
+        "created": created,
+        "error": error
     }
