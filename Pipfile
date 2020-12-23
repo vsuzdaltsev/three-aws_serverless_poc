@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-invoke = "*"
 
 [dev-packages]
+invoke = "==1.4.1"
 
 [requires]
 python_version = "3.9"
