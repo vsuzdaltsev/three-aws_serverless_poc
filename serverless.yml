@@ -31,6 +31,11 @@ functions:
   create_s3_bucket:
     description: Create AWS S3 bucket
     handler: create_s3_bucket/handler.create_s3_bucket
+    events:
+      - http:
+          path: ${self:service}/create_s3_bucket
+          method: POST
+          private: true
     memorySize: 128
     environment:
       LOG_LEVEL: DEBUG

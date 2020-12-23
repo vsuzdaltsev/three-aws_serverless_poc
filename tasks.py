@@ -15,6 +15,17 @@ def sls_config(key):
 
 
 @task
+def install_dependencies(c):
+    plugins = sls_config('plugins')
+
+    def install_sls_plugin(plugin):
+        log("warning", f">> Install dependencies: {plugin}")
+        c.run(f"sls plugin install --name {plugin}")
+
+    list(map(lambda p: install_sls_plugin(p), plugins))
+
+
+@task(pre=[install_dependencies])
 def deploy(c):
     """>> Deploy serverless application."""
     c.run('sls deploy')
@@ -41,17 +52,6 @@ def autopep8(c):
             log('info', f">> Change working directory to {wd}")
             log('info', ">> Autocorrect python files according to styleguide")
             c.run("autopep8 --in-place --recursive . --max-line-length 200 --aggressive --verbose")
-
-
-@task
-def install_dependencies(c):
-    plugins = sls_config('plugins')
-
-    def install_sls_plugin(plugin):
-        log("warning", f">> Install dependencies: {plugin}")
-        c.run(f"sls plugin install --name {plugin}")
-
-    list(map(lambda p: install_sls_plugin(p), plugins))
 
 
 ns = Collection()
