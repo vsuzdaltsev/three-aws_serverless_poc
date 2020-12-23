@@ -1,3 +1,4 @@
+import json
 from logging import Logger
 
 import boto3
@@ -8,6 +9,7 @@ def create_s3_bucket(event, _context):
     Payload example:
         --data '{"region": "us-east-1", "bucket_name": "uniq_named_bucket"}'
     """
+
     def log(severity, message):
         Logger(name='__name__').__getattribute__(severity)(message)
 
@@ -29,14 +31,23 @@ def create_s3_bucket(event, _context):
             return False, str(err)
         return True, None
 
-    where = event['region']
-    bucket = event['bucket_name']
+    lambda_input = json.loads(event.get('body'))
+    where = lambda_input.get('region')
+    bucket = lambda_input.get('bucket_name')
 
     created, error = create(region=where, bucket_name=bucket)
 
-    return {
-        "status_code": 200,
-        "input": event,
+    body = {
+        "input": lambda_input,
         "created": created,
         "error": error
+    }
+
+    return {
+        "isBase64Encoded": False,
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Origin": '*'
+        },
+        "body": json.dumps(body)
     }
