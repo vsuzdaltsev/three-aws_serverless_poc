@@ -5,10 +5,7 @@ import boto3
 
 
 def create_s3_bucket(event, _context):
-    region = event['region']
-    if region == 'us-east-1':
-        region = None
-
+    region = event['region'] if event['region'] and event['region'] != 'us-east-1' else None
     bucket_name = event['bucket_name']
 
     def log(severity, message):
