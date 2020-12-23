@@ -16,6 +16,7 @@ def sls_config(key):
 
 @task
 def install_dependencies(c):
+    """Install necessary serverless plugins."""
     plugins = sls_config('plugins')
 
     def install_sls_plugin(plugin):
