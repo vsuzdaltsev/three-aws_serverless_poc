@@ -23,11 +23,12 @@ def list_s3_bucket(event, _context):
                     aggr.append(file.key)
                 return aggr, None
             else:
-                log("warning", f">> No bucket name provided")
+                err = ">> No bucket name provided"
+                log("error", err)
+                return False, err
         except BaseException as err:
             log("error", f">> Failed while listing s3 bucket {bucket_name}. Error: {err}")
             return False, str(err)
-        return True, None
 
     lambda_input = event.get('path').split('/')[-1]
     output, error = list_files(bucket_name=lambda_input)
