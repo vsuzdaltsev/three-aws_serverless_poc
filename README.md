@@ -4,9 +4,9 @@
 
 ### Prerequisites
 
-- python >= 3.8
-- serverless framework
-- pipenv
+- `python` >= 3.8
+- `serverless` framework
+- `pipenv`
 
 ### Prepare environment
 
