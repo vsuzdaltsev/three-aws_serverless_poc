@@ -45,3 +45,9 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 ```
 $ inv serverless.deploy
 ```
+
+- Remove application along with all related resources
+
+```
+$ inv serverless.remove
+```
