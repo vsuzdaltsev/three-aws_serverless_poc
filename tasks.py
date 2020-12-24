@@ -43,6 +43,12 @@ def remove(c):
 
 
 @task
+def offline(c):
+    """>> Run serverless application in offline mode."""
+    c.run('sls offline')
+
+
+@task
 def autopep8(c):
     """>> Run autocorrection on python files."""
     log('warning', ">> Autocorrect python files according to styleguide")
@@ -62,6 +68,8 @@ serverless = Collection('serverless')
 local.add_task(autopep8, 'autopep8')
 serverless.add_task(deploy, 'deploy')
 serverless.add_task(remove, 'remove')
+serverless.add_task(offline, 'offline')
+
 
 ns.add_collection(local)
 ns.add_collection(serverless)
