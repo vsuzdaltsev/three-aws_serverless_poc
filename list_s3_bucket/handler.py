@@ -19,8 +19,7 @@ def list_s3_bucket(event, _context):
                 s3 = boto3.resource('s3')
                 bucket = s3.Bucket(bucket_name)
                 aggr = []
-                for file in bucket.objects.all():
-                    aggr.append(file.key)
+                [aggr.append(file.key) for file in bucket.objects.all()]
                 return aggr, None
             else:
                 err = ">> No bucket name provided"
