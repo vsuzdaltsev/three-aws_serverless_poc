@@ -12,7 +12,7 @@ provider:
   runtime: python3.8
   stage: prod
   region: ${self:custom.mgmt_region}
-  timeout: 900
+  timeout: 30 # this is because the lambdas are attached to api gateway
   logRetentionInDays: 14
   iamRoleStatements:
     - Effect: "Allow"
@@ -68,4 +68,4 @@ functions:
         - upload_to_s3_bucket/handler.py
 
 plugins:
-  - serverless-step-functions
+  - serverless-offline

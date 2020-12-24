@@ -22,4 +22,13 @@ $ pipenv install invoke
 
 ```
 $ inv -l
+>>
+Available tasks:
+
+  local.autopep8                    >> Run autocorrection on python files.
+  serverless.deploy                 >> Deploy serverless application.
+  serverless.remove                 >> Remove serverless application.
+
 ```
+
+-

@@ -62,7 +62,6 @@ serverless = Collection('serverless')
 local.add_task(autopep8, 'autopep8')
 serverless.add_task(deploy, 'deploy')
 serverless.add_task(remove, 'remove')
-serverless.add_task(install_dependencies, 'install_dependencies')
 
 ns.add_collection(local)
 ns.add_collection(serverless)
