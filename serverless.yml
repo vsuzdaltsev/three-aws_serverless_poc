@@ -5,12 +5,13 @@ frameworkVersion: "2"
 custom:
   maintainer: three
   description: "Serverless application POC"
+  mgmt_region: us-east-1
 
 provider:
   name: aws
   runtime: python3.8
   stage: prod
-  region: us-east-1
+  region: ${self:custom.mgmt_region}
   timeout: 900
   logRetentionInDays: 14
   iamRoleStatements:
@@ -23,6 +24,10 @@ provider:
     MAINTAINER: ${self:custom.maintainer}
     DESCRIPTION: ${self:custom.description}
     APPLICATION: poc
+  apiKeys:
+    - ${self:service}-api-key
+  logs:
+    restApi: true
 
 package:
   individually: true
@@ -31,6 +36,11 @@ functions:
   create_s3_bucket:
     description: Create AWS S3 bucket
     handler: create_s3_bucket/handler.create_s3_bucket
+    events:
+      - http:
+          path: ${self:service}/create_s3_bucket
+          method: POST
+          private: true
     memorySize: 128
     environment:
       LOG_LEVEL: DEBUG
@@ -39,3 +49,23 @@ functions:
         - "**"
       include:
         - create_s3_bucket/handler.py
+
+  upload_to_s3_bucket:
+    description: Generate presigned URL for uploading object to given AWS S3 bucket
+    handler: upload_to_s3_bucket/handler.upload_to_s3_bucket
+    events:
+      - http:
+          path: ${self:service}/upload_to_s3_bucket
+          method: POST
+          private: true
+    memorySize: 128
+    environment:
+      LOG_LEVEL: DEBUG
+    package:
+      exclude:
+        - "**"
+      include:
+        - upload_to_s3_bucket/handler.py
+
+plugins:
+  - serverless-step-functions

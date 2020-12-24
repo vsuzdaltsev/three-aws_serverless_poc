@@ -1,33 +1,50 @@
 from logging import Logger
 
 from invoke import task, Collection
+import yaml
 
 
 def lambdas():
-    return ['create_s3_bucket']
+    return ['create_s3_bucket', 'upload_to_s3_bucket']
+
+
+def sls_config(key):
+    with open('serverless.yml', 'r') as config:
+        file = config.read()
+        return yaml.safe_load(file).get(key)
 
 
 @task
+def install_dependencies(c):
+    """Install necessary serverless plugins."""
+    plugins = sls_config('plugins')
+
+    def install_sls_plugin(plugin):
+        log("warning", f">> Install dependencies: {plugin}")
+        c.run(f"sls plugin install --name {plugin}")
+
+    list(map(lambda p: install_sls_plugin(p), plugins))
+
+
+@task(pre=[install_dependencies])
 def deploy(c):
-    """>> Deploy serverless application"""
+    """>> Deploy serverless application."""
     c.run('sls deploy')
 
 
 @task
 def remove(c):
-    """>> Remove serverless application"""
+    """>> Remove serverless application."""
     c.run('sls remove')
 
 
 def log(severity, message):
-    assert severity in ('debug', 'info', 'error', 'warning')
-
     Logger(name='__name__').__getattribute__(severity)(message)
 
 
 @task
 def autopep8(c):
-    """>> Run autocorrection on python files"""
+    """>> Run autocorrection on python files."""
     log('warning', ">> Autocorrect python files according to styleguide")
     c.run("autopep8 --in-place --max-line-length 200 --aggressive *.py --verbose")
 
@@ -45,6 +62,7 @@ serverless = Collection('serverless')
 local.add_task(autopep8, 'autopep8')
 serverless.add_task(deploy, 'deploy')
 serverless.add_task(remove, 'remove')
+serverless.add_task(install_dependencies, 'install_dependencies')
 
 ns.add_collection(local)
 ns.add_collection(serverless)
