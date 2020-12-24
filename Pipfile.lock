@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1db3fa2925b1a7fcb842bf6224187755acbd776d0dc24f0b3e43b38e2f39318d"
+            "sha256": "aa2bc163959857718690bee97c856a98f7a7bb816939ac3373082769d7f634c9"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.9"
+            "python_version": "3.8"
         },
         "sources": [
             {
@@ -19,11 +19,11 @@
     "develop": {
         "boto3": {
             "hashes": [
-                "sha256:0bb2c3159b9f5e0df50430bf06a155bd7f27f480825b6374dde807d42360a668",
-                "sha256:a49b3ab4bfa2f6394ba60165cfc468410797dd410f32eed47e22f61451ee986e"
+                "sha256:928e73f51f71469a1b0cead1fbb37f304457ec54400833c02c0c328e64581fea",
+                "sha256:d6da24ad4427b1bd6ecf0229bd06f882f53d6138f6a820a4bc4200408b642d05"
             ],
             "index": "pypi",
-            "version": "==1.16.43"
+            "version": "==1.16.42"
         },
         "botocore": {
             "hashes": [
@@ -46,6 +46,7 @@
                 "sha256:b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9",
                 "sha256:cdf6525904cc597730141d61b36f2e4b8ecc257c420fa2f4549bac2c2d0cb72f"
             ],
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==0.10.0"
         },
         "python-dateutil": {
@@ -53,6 +54,7 @@
                 "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c",
                 "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"
             ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==2.8.1"
         },
         "pyyaml": {
@@ -86,6 +88,7 @@
                 "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
                 "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
             ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==1.15.0"
         },
         "urllib3": {
