@@ -3,6 +3,7 @@ from logging import Logger
 
 import boto3
 
+
 def list_s3_bucket(event, _context):
     """
     Payload example:

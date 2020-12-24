@@ -5,7 +5,7 @@ import yaml
 
 
 def lambdas():
-    return ['create_s3_bucket', 'upload_to_s3_bucket']
+    return ['create_s3_bucket', 'upload_to_s3_bucket', 'list_s3_bucket']
 
 
 def sls_config(key):
