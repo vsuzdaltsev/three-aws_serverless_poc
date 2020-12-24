@@ -31,4 +31,17 @@ Available tasks:
 
 ```
 
--
+- Export credentials
+
+```
+$ export AWS_REGION="[region here]"
+$ export AWS_ACCESS_KEY_ID="[access key id here]"
+$ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
+
+```
+
+- Deploy application
+
+```
+$ inv serverless.deploy
+```
