@@ -51,6 +51,12 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 $ inv serverless.deploy
 ```
 
+### Run application in offline mode
+
+```
+$ inv serverless.offline
+```
+
 ### Remove application along with all related resources
 
 ```
