@@ -26,9 +26,10 @@ $ inv -l
 >>
 Available tasks:
 
-  local.autopep8                    >> Run autocorrection on python files.
-  serverless.deploy                 >> Deploy serverless application.
-  serverless.remove                 >> Remove serverless application.
+  local.autopep8       >> Run autocorrection on python files.
+  serverless.deploy    >> Deploy serverless application.
+  serverless.offline   >> Run serverless application in offline mode.
+  serverless.remove    >> Remove serverless application.
 
 ```
 
