@@ -13,7 +13,7 @@
 - Prepare python environment
 
 ```
-$ pipenv --python 3.9.1
+$ pipenv --python 3.8
 $ pipenv shell
 $ pipenv sync
 $ pipenv sync --dev
