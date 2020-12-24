@@ -7,7 +7,7 @@ name = "pypi"
 
 [dev-packages]
 invoke = "==1.4.1"
-boto3 = "*"
+boto3 = "==1.16.42"
 pyyaml = "*"
 
 [requires]
