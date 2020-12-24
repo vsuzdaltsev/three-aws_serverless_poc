@@ -67,5 +67,22 @@ functions:
       include:
         - upload_to_s3_bucket/handler.py
 
+  list_s3_bucket:
+    description: List files in given AWS S3 bucket
+    handler: list_s3_bucket/handler.list_s3_bucket
+    events:
+      - http:
+          path: ${self:service}/list_s3_bucket/{bucket_name}
+          method: GET
+          private: true
+    memorySize: 128
+    environment:
+      LOG_LEVEL: DEBUG
+    package:
+      exclude:
+        - "**"
+      include:
+        - list_s3_bucket/handler.py
+
 plugins:
   - serverless-offline
