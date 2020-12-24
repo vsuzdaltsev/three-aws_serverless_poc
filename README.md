@@ -15,6 +15,7 @@ The following software is to be installed to start:
 - Prepare python environment
 
 ```
+$ cd [repo directory]
 $ pipenv --python 3.8
 $ pipenv shell
 $ pipenv sync
