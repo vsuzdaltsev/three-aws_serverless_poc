@@ -4,6 +4,8 @@
 
 ### Prerequisites
 
+The following software is to be installed to start:
+
 - `python` >= 3.8
 - `serverless` framework
 - `pipenv`
