@@ -10,7 +10,7 @@ The following software is to be installed to start:
 - `serverless` framework
 - `pipenv`
 
-### Prepare environment
+### Environment setup
 
 - Prepare python environment
 
@@ -45,13 +45,13 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 
 ```
 
-- Deploy application
+### Deploy application
 
 ```
 $ inv serverless.deploy
 ```
 
-- Remove application along with all related resources
+### Remove application along with all related resources
 
 ```
 $ inv serverless.remove
