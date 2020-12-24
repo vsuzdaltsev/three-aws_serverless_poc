@@ -8,6 +8,10 @@ def lambdas():
     return ['create_s3_bucket', 'upload_to_s3_bucket', 'list_s3_bucket']
 
 
+def log(severity, message):
+    Logger(name='__name__').__getattribute__(severity)(message)
+
+
 def sls_config(key):
     with open('serverless.yml', 'r') as config:
         file = config.read()
@@ -36,10 +40,6 @@ def deploy(c):
 def remove(c):
     """>> Remove serverless application."""
     c.run('sls remove')
-
-
-def log(severity, message):
-    Logger(name='__name__').__getattribute__(severity)(message)
 
 
 @task
