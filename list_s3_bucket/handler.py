@@ -18,9 +18,9 @@ def list_s3_bucket(event, _context):
                 log("info", f">> Processing listing files for s3 bucket {bucket_name}")
                 s3 = boto3.resource('s3')
                 bucket = s3.Bucket(bucket_name)
-                aggr = []
-                [aggr.append(file.key) for file in bucket.objects.all()]
-                return aggr, None
+                files = []
+                [files.append(file.key) for file in bucket.objects.all()]
+                return files, None
             else:
                 err = ">> No bucket name provided"
                 log("error", err)
