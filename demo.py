@@ -29,7 +29,6 @@ if __name__ == "__main__":
     HEADERS = {'x-api-key': API_KEY}
 
     temp_dir = create_temp_dir(f"{uuid.uuid4().hex}_temp")
-
     random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]
 
     def generate_random_files(names):
