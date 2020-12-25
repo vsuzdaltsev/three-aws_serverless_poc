@@ -4,7 +4,6 @@ from multiprocessing.dummy import Pool as ThreadPool
 import requests
 import uuid
 from shutil import rmtree
-from threading import Thread
 
 FILES_NUMBER = 100
 
