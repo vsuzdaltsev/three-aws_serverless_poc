@@ -6,6 +6,7 @@ import uuid
 from shutil import rmtree
 
 FILES_NUMBER = 100
+FILE_SIZE = 1024  # 1024 = 1M
 
 
 def create_temp_dir(where):
@@ -33,7 +34,7 @@ if __name__ == "__main__":
 
     for file in random_names:
         with open(file, 'wb') as f:
-            f.write(os.urandom(1024) * 1024)
+            f.write(os.urandom(1024) * FILE_SIZE)
 
     def create_test_bucket():
         data = json.dumps({"region": REGION, "bucket_name": TEST_BUCKET})
@@ -51,7 +52,7 @@ if __name__ == "__main__":
 
     def upload_req(test_file):
         url = upload_link(TEST_BUCKET)['upload_url']
-        requests.request("PUT", url, data=open(test_file, "rb"), headers=HEADERS)
+        requests.request("PUT", url, data=open(test_file, "rb"))
 
     def go_thread_pool():
         pool = ThreadPool(FILES_NUMBER)
