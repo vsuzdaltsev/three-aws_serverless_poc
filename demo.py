@@ -32,10 +32,9 @@ if __name__ == "__main__":
             with open(file, 'wb') as f:
                 f.write(os.urandom(1024) * FILE_SIZE)
 
-    def create_test_bucket():
-        data = json.dumps({"region": REGION, "bucket_name": TEST_BUCKET})
+    def create_test_bucket(bucket):
+        data = json.dumps({"region": REGION, "bucket_name": bucket})
         uri = f"{BASE_URI}/create_s3_bucket"
-        print(uri)
         response = requests.post(uri, headers=HEADERS, data=data)
         print(response.__dict__)
         content = json.loads(response.content)
@@ -52,9 +51,9 @@ if __name__ == "__main__":
         url = upload_link(TEST_BUCKET)['upload_url']
         requests.request("PUT", url, data=open(test_file, "rb"))
 
-    def go_thread_pool():
+    def go_thread_pool(files):
         pool = ThreadPool(FILES_NUMBER)
-        pool.map(upload, random_names)
+        pool.map(upload, files)
         pool.close()
         pool.join()
 
@@ -62,8 +61,8 @@ if __name__ == "__main__":
     random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]
 
     generate_random_files(random_names)
-    create_test_bucket()
-    go_thread_pool()
+    create_test_bucket(TEST_BUCKET)
+    go_thread_pool(random_names)
 
     if os.path.isdir(temp_dir):
         rmtree(temp_dir)

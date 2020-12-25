@@ -2,7 +2,7 @@
 
 ## LCM
 
-### Prerequisites
+### Requirements
 
 The following software is to be installed to start:
 
