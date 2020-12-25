@@ -29,7 +29,7 @@ def list_s3_bucket(event, _context):
     lambda_input = event.get('path').split('/')[-1]
     output, error = list_files(bucket_name=lambda_input)
 
-    body = {
+    response_body = {
         "input": lambda_input,
         "output": output,
         "error": error
@@ -38,5 +38,5 @@ def list_s3_bucket(event, _context):
     return {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(response_body)
     }
