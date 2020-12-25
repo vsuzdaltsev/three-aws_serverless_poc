@@ -81,6 +81,5 @@ serverless.add_task(remove, 'remove')
 serverless.add_task(info, 'info')
 serverless.add_task(offline, 'offline')
 
-
 ns.add_collection(local)
 ns.add_collection(serverless)
