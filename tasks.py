@@ -7,6 +7,7 @@ FAKE_API_KEY = 'd41d8cd98f00b204e9800998ecf8427e'
 FAKE_API_PORT = 3000
 FAKE_API_HOST = 'localhost'
 
+
 def lambdas():
     return 'create_s3_bucket', 'upload_to_s3_bucket', 'list_s3_bucket'
 
@@ -46,6 +47,12 @@ def remove(c):
 
 
 @task
+def info(c):
+    """>> Serverless application status info. Including endpoints and api token."""
+    c.run(f"sls info")
+
+
+@task
 def offline(c):
     """>> Run serverless application in offline mode."""
     c.run(f"sls offline --apiKey {FAKE_API_KEY} --httpPort {FAKE_API_PORT}  --host {FAKE_API_HOST} --printOutput")
@@ -71,6 +78,7 @@ serverless = Collection('serverless')
 local.add_task(autopep8, 'autopep8')
 serverless.add_task(deploy, 'deploy')
 serverless.add_task(remove, 'remove')
+serverless.add_task(info, 'info')
 serverless.add_task(offline, 'offline')
 
 
