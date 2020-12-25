@@ -10,7 +10,7 @@ EXPIRATION = 3600
 def upload_to_s3_bucket(event, _context):
     """
     Payload example:
-        --data '{"bucket_name": "uniq_named_bucket"}'
+        --data '{"bucket_name": "uniqnamedbucket"}'
     """
     client = boto3.client('s3')
     upload_key = uuid.uuid4().hex
@@ -27,10 +27,10 @@ def upload_to_s3_bucket(event, _context):
         }
     )
 
-    body = {"upload_url": presigned_url, "expires": presigned_url.split("=")[-1]}
+    response_body = {"upload_url": presigned_url, "expires": presigned_url.split("=")[-1]}
 
     return {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(response_body)
     }
