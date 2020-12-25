@@ -21,6 +21,8 @@ if __name__ == "__main__":
     REGION = 'us-east-1'
     TEST_BUCKET = 'uniqnamedbucket5'
     API_KEY = os.getenv('TEST_POC_API_KEY')
+    assert isinstance(API_KEY, dict), ">> Please export appropriate TEST_POC_API_KEY"
+
     BASE_URI = 'http://localhost:3000/prod/poc'
     HEADERS = {'x-api-key': API_KEY}
 
