@@ -14,7 +14,7 @@ def list_s3_bucket(event, _context):
 
     def list_files(bucket_name):
         try:
-            if lambda_input:
+            if bucket_name:
                 log("info", f">> Processing listing files for s3 bucket {bucket_name}")
                 bucket = boto3.resource('s3').Bucket(bucket_name)
                 return [file.key for file in bucket.objects.all()], None
