@@ -23,8 +23,9 @@ if __name__ == "__main__":
     BASE_URI = os.getenv('BASE_URI') or 'http://localhost:3000/prod/poc'
     REGION = 'us-east-1'
     TEST_BUCKET = 'uniqnamedbucket5'
-
     HEADERS = {'x-api-key': API_KEY}
+
+    print(f"!!!!!!!!!! >> HEADERS: {HEADERS}")
 
     def generate_random_files(names):
         for file in names:
@@ -34,9 +35,9 @@ if __name__ == "__main__":
     def create_test_bucket():
         data = json.dumps({"region": REGION, "bucket_name": TEST_BUCKET})
         uri = f"{BASE_URI}/create_s3_bucket"
-        #print(uri)
+        print(uri)
         response = requests.post(uri, headers=HEADERS, data=data)
-        #print(response.__dict__)
+        print(response.__dict__)
         content = json.loads(response.content)
         return content
 

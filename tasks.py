@@ -3,6 +3,9 @@ from logging import Logger
 from invoke import task, Collection
 import yaml
 
+FAKE_API_KEY = 'd41d8cd98f00b204e9800998ecf8427e'
+FAKE_API_PORT = 3000
+FAKE_API_HOST = 'localhost'
 
 def lambdas():
     return 'create_s3_bucket', 'upload_to_s3_bucket', 'list_s3_bucket'
@@ -45,7 +48,7 @@ def remove(c):
 @task
 def offline(c):
     """>> Run serverless application in offline mode."""
-    c.run('sls offline')
+    c.run(f"sls offline --apiKey {FAKE_API_KEY} --httpPort {FAKE_API_PORT}  --host {FAKE_API_HOST} --printOutput")
 
 
 @task
