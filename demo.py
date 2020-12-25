@@ -2,8 +2,8 @@ import os
 import json
 from multiprocessing.dummy import Pool as ThreadPool
 import requests
-import uuid
 from shutil import rmtree
+import uuid
 
 FILES_NUMBER = 10
 FILE_SIZE = 1024 * 50  # 1024 = 1M
