@@ -9,7 +9,7 @@ name = "pypi"
 boto3 = "==1.16.42"
 invoke = "==1.4.1"
 pyyaml = "==5.3.1"
-requests = "*"
+requests = "==2.25.1"
 
 [requires]
 python_version = "3.8"
