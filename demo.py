@@ -6,7 +6,7 @@ from shutil import rmtree
 import uuid
 
 FILES_NUMBER = 10
-FILE_SIZE = 1024 * 5  # 1024 = 1M
+FILE_SIZE = 1024 * 1  # 1024 = 1M
 
 
 def create_temp_dir(where):
@@ -34,7 +34,9 @@ if __name__ == "__main__":
     def create_test_bucket():
         data = json.dumps({"region": REGION, "bucket_name": TEST_BUCKET})
         uri = f"{BASE_URI}/create_s3_bucket"
+        #print(uri)
         response = requests.post(uri, headers=HEADERS, data=data)
+        #print(response.__dict__)
         content = json.loads(response.content)
         return content
 
@@ -58,8 +60,8 @@ if __name__ == "__main__":
     temp_dir = create_temp_dir(f"{uuid.uuid4().hex}_temp")
     random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]
 
-    create_test_bucket()
     generate_random_files(random_names)
+    create_test_bucket()
     go_thread_pool()
 
     if os.path.isdir(temp_dir):

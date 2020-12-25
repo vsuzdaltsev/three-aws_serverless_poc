@@ -28,8 +28,8 @@ provider:
     - ${self:service}-api-key
   logs:
     restApi: true
-  apiGateway:
-    shouldStartNameWithService: true
+  #apiGateway:
+  #  shouldStartNameWithService: true
 
 package:
   individually: true
