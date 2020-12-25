@@ -41,7 +41,7 @@ functions:
     events:
       - http:
           path: ${self:service}/create_s3_bucket
-          method: POST
+          method: post
           private: true
     memorySize: 128
     environment:
@@ -58,7 +58,7 @@ functions:
     events:
       - http:
           path: ${self:service}/upload_to_s3_bucket
-          method: POST
+          method: post
           private: true
     memorySize: 128
     environment:
@@ -76,7 +76,7 @@ functions:
     events:
       - http:
           path: ${self:service}/list_s3_bucket/{bucket_name}
-          method: GET
+          method: get
           private: true
     memorySize: 128
     environment:

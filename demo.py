@@ -25,7 +25,8 @@ if __name__ == "__main__":
     TEST_BUCKET = 'uniqnamedbucket5'
     HEADERS = {'x-api-key': API_KEY}
 
-    print(f"!!!!!!!!!! >> HEADERS: {HEADERS}")
+    print(f">> HEADERS: {HEADERS}")
+    print(f">> BASE_URI: {BASE_URI}")
 
     def generate_random_files(names):
         for file in names:
