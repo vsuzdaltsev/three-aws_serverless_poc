@@ -1,10 +1,11 @@
 import json
+import os
 import uuid
 
 import boto3
 
 
-EXPIRATION = 3600
+LINK_EXPIRATION = os.getenv('LINK_EXPIRATION') or 3600
 
 
 def upload_to_s3_bucket(event, _context):
@@ -20,7 +21,7 @@ def upload_to_s3_bucket(event, _context):
 
     presigned_url = client.generate_presigned_url(
         ClientMethod='put_object',
-        ExpiresIn=EXPIRATION,
+        ExpiresIn=LINK_EXPIRATION,
         Params={
             'Bucket': bucket,
             'Key': upload_key

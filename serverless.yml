@@ -61,6 +61,7 @@ functions:
     memorySize: 128
     environment:
       LOG_LEVEL: DEBUG
+      LINK_EXPIRATION: 3600
     package:
       exclude:
         - "**"
