@@ -37,7 +37,7 @@ def create_s3_bucket(event, _context):
 
     created, error = create(region=where, bucket_name=bucket)
 
-    body = {
+    response_body = {
         "input": lambda_input,
         "created": created,
         "error": error
@@ -46,5 +46,5 @@ def create_s3_bucket(event, _context):
     return {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(response_body)
     }
