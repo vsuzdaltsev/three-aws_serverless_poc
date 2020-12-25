@@ -6,7 +6,7 @@ from shutil import rmtree
 import uuid
 
 FILES_NUMBER = 10
-FILE_SIZE = 1024 * 50  # 1024 = 1M
+FILE_SIZE = 1024 * 5  # 1024 = 1M
 
 
 def create_temp_dir(where):
@@ -19,17 +19,12 @@ def create_temp_dir(where):
 
 
 if __name__ == "__main__":
-    API_KEY = os.getenv('TEST_POC_API_KEY')
-    assert isinstance(API_KEY, str), ">> Please export appropriate TEST_POC_API_KEY"
-
+    API_KEY = os.getenv('TEST_POC_API_KEY') or "d41d8cd98f00b204e9800998ecf8427e"
+    BASE_URI = os.getenv('BASE_URI') or 'http://localhost:3000/prod/poc'
     REGION = 'us-east-1'
     TEST_BUCKET = 'uniqnamedbucket5'
 
-    BASE_URI = 'http://localhost:3000/prod/poc'
     HEADERS = {'x-api-key': API_KEY}
-
-    temp_dir = create_temp_dir(f"{uuid.uuid4().hex}_temp")
-    random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]
 
     def generate_random_files(names):
         for file in names:
@@ -60,6 +55,12 @@ if __name__ == "__main__":
         pool.close()
         pool.join()
 
+    temp_dir = create_temp_dir(f"{uuid.uuid4().hex}_temp")
+    random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]
+
     create_test_bucket()
     generate_random_files(random_names)
     go_thread_pool()
+
+    if os.path.isdir(temp_dir):
+        rmtree(temp_dir)
