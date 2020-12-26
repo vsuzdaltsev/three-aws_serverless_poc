@@ -7,14 +7,16 @@ import requests
 from shutil import rmtree
 import uuid
 
+from tasks import FAKE_API_KEY
+
 FILES_NUMBER = 10
 FILE_SIZE = 1024 * 1  # 1024 = 1M
 
-API_KEY = os.getenv('TEST_POC_API_KEY') or "d41d8cd98f00b204e9800998ecf8427e"
+API_KEY = os.getenv('TEST_POC_API_KEY')
 BASE_URI = os.getenv('BASE_URI') or 'http://localhost:3000/prod/poc'
 REGION = 'us-east-1'
 TEST_BUCKET = 'uniqnamedbucket5'
-HEADERS = {'x-api-key': API_KEY}
+HEADERS = {'x-api-key': FAKE_API_KEY}
 
 
 if __name__ == "__main__":
