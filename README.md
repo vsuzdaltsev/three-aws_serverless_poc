@@ -76,5 +76,5 @@ $ inv serverless.remove
 ### Stop and remove serverless container
 
 ```
-$ inv serverless.remove
+$ inv serverless.stop-container
 ```
