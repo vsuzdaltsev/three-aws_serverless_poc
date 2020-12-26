@@ -55,7 +55,7 @@ def info(c):
 @task
 def offline(c):
     """>> Run serverless application in offline mode."""
-    c.run(f"sls offline --apiKey {FAKE_API_KEY} --httpPort {FAKE_API_PORT}  --host {FAKE_API_HOST} --printOutput")
+    c.run(f"docker-compose -f docker-compose-build.yml exec -T poc pipenv run sls offline --host 0.0.0.0 --printOutput")
 
 
 @task
@@ -71,6 +71,43 @@ def autopep8(c):
             c.run("autopep8 --in-place --recursive . --max-line-length 200 --aggressive --verbose")
 
 
+@task
+def build_build_docker_compose(c):
+    print(">> Build docker-compose")
+    c.run('docker-compose -f docker-compose-build.yml build')
+
+
+@task
+def run_build_docker_compose(c):
+    print(">> Build docker-compose")
+    c.run('docker-compose -f docker-compose-build.yml up -d')
+
+
+@task
+def stop_build_docker_compose(c):
+    print(">> Kill docker-compose")
+    c.run('docker-compose -f docker-compose-build.yml kill -s SIGKILL')
+
+
+@task
+def rm_build_docker_compose(c):
+    print(">> Remove docker-compose")
+    c.run('docker-compose -f docker-compose-build.yml rm -f')
+
+
+@task
+def remove_build_container(c):
+    stop_build_docker_compose(c)
+    rm_build_docker_compose(c)
+
+
+@task(pre=[build_build_docker_compose, run_build_docker_compose])
+def restart_build_container(c):
+    """
+    >> Build and run build container
+    """
+
+
 ns = Collection()
 local = Collection('local')
 serverless = Collection('serverless')
@@ -81,5 +118,7 @@ serverless.add_task(remove, 'remove')
 serverless.add_task(info, 'info')
 serverless.add_task(offline, 'offline')
 
+serverless.add_task(restart_build_container, 'rebuild_container')
+serverless.add_task(remove_build_container, 'stop_container')
 ns.add_collection(local)
 ns.add_collection(serverless)
