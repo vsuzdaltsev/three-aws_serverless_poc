@@ -10,25 +10,25 @@ import uuid
 FILES_NUMBER = 10
 FILE_SIZE = 1024 * 1  # 1024 = 1M
 
-
-def create_temp_dir(where):
-    full_path = os.path.realpath(where)
-    directory = os.path.dirname(full_path) + '/tmp/'
-    if os.path.isdir(directory):
-        rmtree(directory)
-    os.mkdir(directory)
-    return directory
+API_KEY = os.getenv('TEST_POC_API_KEY') or "d41d8cd98f00b204e9800998ecf8427e"
+BASE_URI = os.getenv('BASE_URI') or 'http://localhost:3000/prod/poc'
+REGION = 'us-east-1'
+TEST_BUCKET = 'uniqnamedbucket5'
+HEADERS = {'x-api-key': API_KEY}
 
 
 if __name__ == "__main__":
-    API_KEY = os.getenv('TEST_POC_API_KEY') or "d41d8cd98f00b204e9800998ecf8427e"
-    BASE_URI = os.getenv('BASE_URI') or 'http://localhost:3000/prod/poc'
-    REGION = 'us-east-1'
-    TEST_BUCKET = 'uniqnamedbucket5'
-    HEADERS = {'x-api-key': API_KEY}
 
     print(f">> HEADERS: {HEADERS}")
     print(f">> BASE_URI: {BASE_URI}")
+
+    def create_temp_dir(where):
+        full_path = os.path.realpath(where)
+        directory = os.path.dirname(full_path) + '/tmp/'
+        if os.path.isdir(directory):
+            rmtree(directory)
+        os.mkdir(directory)
+        return directory
 
     def generate_random_files(names):
         for file in names:
