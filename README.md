@@ -63,8 +63,27 @@ $ inv serverless.deploy
 
 ### Run application in offline mode
 
+- Run fake api gateway
+
 ```
 $ inv serverless.offline
+```
+
+- Check available routes:
+
+```
+$ curl localhost:3000
+>>
+{
+  "currentRoute": "get - /",
+  "error": "Serverless-offline: route not found.",
+  "existingRoutes": [
+    "post - /prod/poc/create_s3_bucket",
+    "get - /prod/poc/list_s3_bucket/{bucket_name}",
+    "post - /prod/poc/upload_to_s3_bucket"
+  ],
+  "statusCode": 404
+}
 ```
 
 ### Remove application along with all related resources
