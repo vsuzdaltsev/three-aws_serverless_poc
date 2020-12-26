@@ -4,8 +4,7 @@ from invoke import task, Collection
 import yaml
 
 FAKE_API_KEY = 'd41d8cd98f00b204e9800998ecf8427e'
-FAKE_API_PORT = 3000
-FAKE_API_HOST = 'localhost'
+IN_DOCKER = 'docker-compose -f docker-compose.yml exec -T poc pipenv run'
 
 
 def lambdas():
@@ -55,7 +54,7 @@ def info(c):
 @task
 def offline(c):
     """>> Run serverless application in offline mode."""
-    c.run(f"docker-compose -f docker-compose-build.yml exec -T poc pipenv run sls offline --host 0.0.0.0 --printOutput")
+    c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
 
 
 @task
@@ -74,25 +73,25 @@ def autopep8(c):
 @task
 def build_build_docker_compose(c):
     print(">> Build docker-compose")
-    c.run('docker-compose -f docker-compose-build.yml build')
+    c.run('docker-compose -f docker-compose.yml build')
 
 
 @task
 def run_build_docker_compose(c):
     print(">> Build docker-compose")
-    c.run('docker-compose -f docker-compose-build.yml up -d')
+    c.run('docker-compose -f docker-compose.yml up -d')
 
 
 @task
 def stop_build_docker_compose(c):
     print(">> Kill docker-compose")
-    c.run('docker-compose -f docker-compose-build.yml kill -s SIGKILL')
+    c.run('docker-compose -f docker-compose.yml kill -s SIGKILL')
 
 
 @task
 def rm_build_docker_compose(c):
     print(">> Remove docker-compose")
-    c.run('docker-compose -f docker-compose-build.yml rm -f')
+    c.run('docker-compose -f docker-compose.yml rm -f')
 
 
 @task
