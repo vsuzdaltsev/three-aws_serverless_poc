@@ -46,25 +46,25 @@ def autopep8(c):
 
 
 @task
-def build_build_docker_compose(c):
+def build_docker_compose(c):
     print(">> Build docker-compose")
     c.run('docker-compose -f docker-compose.yml build')
 
 
 @task
-def run_build_docker_compose(c):
+def run_docker_compose(c):
     print(">> Build docker-compose")
     c.run('docker-compose -f docker-compose.yml up -d')
 
 
 @task
-def stop_build_docker_compose(c):
+def stop_docker_compose(c):
     print(">> Kill docker-compose")
     c.run('docker-compose -f docker-compose.yml kill -s SIGKILL')
 
 
 @task
-def rm_build_docker_compose(c):
+def rm_docker_compose(c):
     print(">> Remove docker-compose")
     c.run('docker-compose -f docker-compose.yml rm -f')
 
@@ -72,16 +72,16 @@ def rm_build_docker_compose(c):
 @task
 def remove_build_container(c):
     """>> Build and run sls container."""
-    stop_build_docker_compose(c)
-    rm_build_docker_compose(c)
+    stop_docker_compose(c)
+    rm_docker_compose(c)
 
 
-@task(pre=[build_build_docker_compose, run_build_docker_compose])
+@task(pre=[build_docker_compose, run_docker_compose])
 def restart_build_container(_c):
     """>> Stop and remove sls container."""
 
 
-@task(pre=[run_build_docker_compose])
+@task(pre=[run_docker_compose])
 def offline(c):
     """>> Run serverless application in offline mode."""
     try:
