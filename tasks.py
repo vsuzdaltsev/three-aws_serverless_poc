@@ -35,7 +35,10 @@ def info(c):
 @task
 def offline(c):
     """>> Run serverless application in offline mode."""
-    c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
+    try:
+        c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
+    finally:
+        remove_build_container(c)
 
 
 @task
