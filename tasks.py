@@ -68,7 +68,8 @@ def restart_build_container(_c):
 def offline(c):
     """>> Run serverless application in offline mode."""
     try:
-        c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput --httpPort {FAKE_API_PORT}")
+        options = f"--apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput --httpPort {FAKE_API_PORT}"
+        c.run(f"{IN_DOCKER} sls offline {options}")
     finally:
         remove_build_container(c)
 
