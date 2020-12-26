@@ -4,6 +4,10 @@
 
 ### Prerequisites
 
+Small demo application which includes AWS api gateway and several AWS lambdas behind.
+
+#### Requirements
+
 The following software is to be installed to start:
 
 - `python` >= 3.8
@@ -12,7 +16,7 @@ The following software is to be installed to start:
 
 ### Environment setup
 
-- Prepare python environment
+#### Prepare python environment:
 
 ```
 $ cd [repo root directory]
@@ -22,7 +26,7 @@ $ pipenv sync
 $ pipenv sync --dev
 ```
 
-- List available tasks
+#### List available tasks:
 
 ```
 $ inv -l
@@ -39,7 +43,7 @@ Available tasks:
 
 ```
 
-- Export credentials
+#### Export AWS credentials to authorize serverless
 
 ```
 $ export AWS_REGION="[region here]"
@@ -48,28 +52,29 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 
 ```
 
-- Start docker
-- Build and run serverless container:
+#### Start docker
+
+#### Build and run the serverless container:
 
 ```
 $ inv serverless.rebuild-container
 ```
 
-### Deploy application
+### Deployment
 
 ```
 $ inv serverless.deploy
 ```
 
-### Run application in offline mode
+### Launching the application in offline mode
 
-- Run fake api gateway
+#### Run fake api gateway:
 
 ```
 $ inv serverless.offline
 ```
 
-- Check available routes:
+#### Check available routes:
 
 ```
 $ curl localhost:3000
@@ -86,13 +91,17 @@ $ curl localhost:3000
 }
 ```
 
-### Remove application along with all related resources
+### Application removal
+
+#### Remove application along with all related resources
 
 ```
 $ inv serverless.remove
 ```
 
-### Stop and remove serverless container
+### Stopping container
+
+#### Stop and remove serverless container
 
 ```
 $ inv serverless.stop-container
