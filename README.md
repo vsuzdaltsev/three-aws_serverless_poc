@@ -33,9 +33,9 @@ Available tasks:
   serverless.deploy              >> Deploy serverless application.
   serverless.info                >> Serverless application status info. Including endpoints and api token.
   serverless.offline             >> Run serverless application in offline mode.
-  serverless.rebuild-container   >> Build and run build container
+  serverless.rebuild-container   >> Build and run build container.
   serverless.remove              >> Remove serverless application.
-  serverless.stop-container      >> Stop and remove sls container
+  serverless.stop-container      >> Stop and remove sls container.
 
 ```
 
