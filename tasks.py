@@ -86,7 +86,7 @@ def remove_build_container(c):
 
 
 @task(pre=[build_build_docker_compose, run_build_docker_compose])
-def restart_build_container(c):
+def restart_build_container(_c):
     """>> Stop and remove sls container."""
 
 
