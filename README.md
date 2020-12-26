@@ -49,6 +49,11 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 ```
 
 - Start docker
+- Build and run serverless container:
+
+```
+$ inv serverless.rebuild-container
+```
 
 ### Deploy application
 
