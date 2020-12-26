@@ -33,15 +33,6 @@ def info(c):
 
 
 @task
-def offline(c):
-    """>> Run serverless application in offline mode."""
-    try:
-        c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
-    finally:
-        remove_build_container(c)
-
-
-@task
 def autopep8(c):
     """>> Run autocorrection on python files."""
     log('warning', ">> Autocorrect python files according to styleguide")
@@ -88,6 +79,15 @@ def remove_build_container(c):
 @task(pre=[build_build_docker_compose, run_build_docker_compose])
 def restart_build_container(_c):
     """>> Stop and remove sls container."""
+
+
+@task(pre=[run_build_docker_compose])
+def offline(c):
+    """>> Run serverless application in offline mode."""
+    try:
+        c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
+    finally:
+        remove_build_container(c)
 
 
 ns = Collection()
