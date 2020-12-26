@@ -7,8 +7,8 @@
 The following software is to be installed to start:
 
 - `python` >= 3.8
-- `serverless` framework
 - `pipenv`
+- `docker` & `docker-compose`
 
 ### Environment setup
 
@@ -47,6 +47,8 @@ $ export AWS_ACCESS_KEY_ID="[access key id here]"
 $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 
 ```
+
+- Start docker
 
 ### Deploy application
 
