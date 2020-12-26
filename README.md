@@ -72,3 +72,9 @@ $ inv serverless.offline
 ```
 $ inv serverless.remove
 ```
+
+### Stop and remove serverless container
+
+```
+$ inv serverless.remove
+```
