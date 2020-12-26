@@ -1,7 +1,6 @@
 from logging import Logger
 
 from invoke import task, Collection
-import yaml
 
 FAKE_API_KEY = 'd41d8cd98f00b204e9800998ecf8427e'
 IN_DOCKER = 'docker-compose -f docker-compose.yml exec -T poc pipenv run'
