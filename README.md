@@ -35,7 +35,7 @@ Available tasks:
   serverless.offline             >> Run serverless application in offline mode.
   serverless.rebuild-container   >> Build and run build container
   serverless.remove              >> Remove serverless application.
-  serverless.stop-container
+  serverless.stop-container      >> Stop and remove sls container
 
 ```
 
