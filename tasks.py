@@ -15,24 +15,6 @@ def log(severity, message):
 
 
 @task
-def deploy(c):
-    """>> Deploy serverless application."""
-    c.run(f"{IN_DOCKER} sls deploy")
-
-
-@task
-def remove(c):
-    """>> Remove serverless application."""
-    c.run(f"{IN_DOCKER} sls remove")
-
-
-@task
-def info(c):
-    """>> Serverless application status info. Including endpoints and api token."""
-    c.run(f"{IN_DOCKER} sls info")
-
-
-@task
 def autopep8(c):
     """>> Run autocorrection on python files."""
     log('warning', ">> Autocorrect python files according to styleguide")
@@ -88,6 +70,24 @@ def offline(c):
         c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
     finally:
         remove_build_container(c)
+
+
+@task(pre=[run_docker_compose])
+def deploy(c):
+    """>> Deploy serverless application."""
+    c.run(f"{IN_DOCKER} sls deploy")
+
+
+@task(pre=[run_docker_compose])
+def remove(c):
+    """>> Remove serverless application."""
+    c.run(f"{IN_DOCKER} sls remove")
+
+
+@task(pre=[run_docker_compose])
+def info(c):
+    """>> Serverless application status info. Including endpoints and api token."""
+    c.run(f"{IN_DOCKER} sls info")
 
 
 ns = Collection()
