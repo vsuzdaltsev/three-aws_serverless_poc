@@ -4,7 +4,8 @@
 
 ### Prerequisites
 
-Small demo application which includes AWS api gateway and several AWS lambdas behind.
+Small demo application which includes AWS api gateway and several AWS lambdas behind.This has been tested with macOS,
+but should work under Linux & Windows as well.
 
 #### Requirements
 
