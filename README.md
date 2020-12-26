@@ -4,8 +4,8 @@
 
 ### Prerequisites
 
-Small demo application which includes AWS Api Gateway and several AWS Lambdas behind it. This has been tested with macOS,
-but should work under Linux & Windows as well.
+Small demo application which includes AWS Api Gateway and several AWS Lambdas behind it. This has been tested with
+macOS, but should work under Linux & Windows as well.
 
 #### Requirements
 
@@ -90,6 +90,20 @@ $ curl localhost:3000
   ],
   "statusCode": 404
 }
+```
+
+#### Run demo script
+
+This will do the following:
+
+* Create s3 bucket
+* Generate several random files
+* Upload them concurrently to s3
+* In order to utilize real API Gateway and Lambdas instead of locally running mocks, set the proper endpoint and token (
+  env: TEST_POC_API_KEY, BASE_URI). They can be found in the output of `inv serverless.info` command.
+
+```
+$ python demo.py
 ```
 
 ### Application removal

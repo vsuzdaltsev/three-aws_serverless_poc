@@ -3,6 +3,7 @@ from logging import Logger
 from invoke import task, Collection
 
 FAKE_API_KEY = 'd41d8cd98f00b204e9800998ecf8427e'
+FAKE_API_PORT = 3000
 IN_DOCKER = 'docker-compose -f docker-compose.yml exec -T poc pipenv run'
 
 
@@ -67,7 +68,7 @@ def restart_build_container(_c):
 def offline(c):
     """>> Run serverless application in offline mode."""
     try:
-        c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput")
+        c.run(f"{IN_DOCKER} sls offline --apiKey {FAKE_API_KEY} --host 0.0.0.0 --printOutput --httpPort {FAKE_API_PORT}")
     finally:
         remove_build_container(c)
 
