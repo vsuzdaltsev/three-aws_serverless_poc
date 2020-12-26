@@ -97,6 +97,9 @@ def rm_build_docker_compose(c):
 
 @task
 def remove_build_container(c):
+    """
+    >> Build and run sls container
+    """
     stop_build_docker_compose(c)
     rm_build_docker_compose(c)
 
@@ -104,7 +107,7 @@ def remove_build_container(c):
 @task(pre=[build_build_docker_compose, run_build_docker_compose])
 def restart_build_container(c):
     """
-    >> Build and run build container
+    >> Build and run sls container
     """
 
 
