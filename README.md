@@ -106,6 +106,8 @@ This will do the following:
 $ python demo.py
 ```
 
+NB: do not forget to remove test s3 bucket!
+
 ### Application removal
 
 #### Remove application along with all related resources
