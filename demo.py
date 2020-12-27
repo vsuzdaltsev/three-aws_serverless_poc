@@ -38,8 +38,7 @@ def generate_random_files(names):
 def create_test_bucket(bucket):
     data = json.dumps({"region": REGION, "bucket_name": bucket})
     uri = f"{BASE_URI}/create_s3_bucket"
-    response = requests.post(uri, headers=HEADERS, data=data)
-    print(response.__dict__)
+    response = requests.request("POST", url=uri, headers=HEADERS, data=data)
     content = json.loads(response.content)
     return content
 
@@ -47,7 +46,7 @@ def create_test_bucket(bucket):
 def upload_link(bucket_name):
     data = json.dumps({"bucket_name": bucket_name})
     uri = f"{BASE_URI}/upload_to_s3_bucket"
-    response = requests.post(uri, headers=HEADERS, data=data)
+    response = requests.request("POST", url=uri, headers=HEADERS, data=data)
     content = json.loads(response.content)
     return content
 
