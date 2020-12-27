@@ -20,10 +20,6 @@ TEST_BUCKET = 'uniqnamedbucket5'
 HEADERS = {'x-api-key': FAKE_API_KEY}
 
 
-print(f">> HEADERS: {HEADERS}")
-print(f">> BASE_URI: {BASE_URI}")
-
-
 def create_temp_dir(where):
     full_path = os.path.realpath(where)
     directory = os.path.dirname(full_path) + '/tmp/'
@@ -69,6 +65,9 @@ def go_thread_pool(files):
 
 
 if __name__ == "__main__":
+
+    print(f">> HEADERS: {HEADERS}")
+    print(f">> BASE_URI: {BASE_URI}")
 
     temp_dir = create_temp_dir(f"{uuid.uuid4().hex}_temp")
     random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]
