@@ -7,7 +7,7 @@
 Small demo application which includes AWS Api Gateway and several AWS Lambdas behind it. This has been tested with
 macOS, but should work under Linux & Windows as well.
 
-#### Requirements
+#### Software requirements
 
 The following software is to be installed to start:
 
