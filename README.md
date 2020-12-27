@@ -53,7 +53,13 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 
 ```
 
-#### Start docker
+#### Make sure docker is running
+
+```
+$ docker ps
+>>
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
 
 #### Build and run the serverless container:
 
