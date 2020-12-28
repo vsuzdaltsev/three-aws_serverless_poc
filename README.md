@@ -17,7 +17,7 @@ The following software is to be installed to start:
 
 ### Environment setup
 
-(Linux or macOS, minor changes in Windows)
+(Linux or macOS. In Windows minor changes needed.)
 
 #### Prepare python environment:
 
