@@ -114,6 +114,13 @@ $ python demo.py
 
 NB: do not forget to remove test s3 bucket!
 
+#### cURL example
+```
+curl -X POST http://localhost:3000/prod/poc/create_s3_bucket -H 'x-api-key: <key>' --data '{"region": "us-east-1", "bucket_name": "uniqnamedbucket"}'
+curl -X POST http://localhost:3000/prod/poc/upload_to_s3_bucket -H 'x-api-key: <key>' --data '{"bucket_name": "uniqnamedbucket"}'
+curl -X GET  http://localhost:3000/prod/poc/list_s3_bucket/uniqnamedbucket -H "x-api-key: <key>"
+```
+
 ### Application removal
 
 #### Remove application along with all related resources
