@@ -28,6 +28,8 @@ provider:
     - ${self:service}-api-key
   logs:
     restApi: true
+  apiGateway:
+    shouldStartNameWithService: true
 
 package:
   individually: true
@@ -61,6 +63,7 @@ functions:
     memorySize: 128
     environment:
       LOG_LEVEL: DEBUG
+      LINK_EXPIRATION: 3600
     package:
       exclude:
         - "**"

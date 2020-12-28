@@ -1,0 +1,18 @@
+version: '2'
+services:
+  poc:
+    container_name: poc
+    image: poc
+    entrypoint: ['/bin/sh', '-c', 'while true; do sleep 10; done']
+    working_dir: /opt/build
+    volumes:
+      - ./:/opt/build
+    environment:
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - 3000:3000

@@ -14,26 +14,22 @@ def list_s3_bucket(event, _context):
 
     def list_files(bucket_name):
         try:
-            if lambda_input:
+            if bucket_name:
                 log("info", f">> Processing listing files for s3 bucket {bucket_name}")
-                s3 = boto3.resource('s3')
-                bucket = s3.Bucket(bucket_name)
-                aggr = []
-                for file in bucket.objects.all():
-                    aggr.append(file.key)
-                return aggr, None
+                bucket = boto3.resource('s3').Bucket(bucket_name)
+                return [file.key for file in bucket.objects.all()], None
             else:
                 err = ">> No bucket name provided"
                 log("error", err)
-                return False, err
+                return None, err
         except BaseException as err:
             log("error", f">> Failed while listing s3 bucket {bucket_name}. Error: {err}")
-            return False, str(err)
+            return None, str(err)
 
     lambda_input = event.get('path').split('/')[-1]
     output, error = list_files(bucket_name=lambda_input)
 
-    body = {
+    response_body = {
         "input": lambda_input,
         "output": output,
         "error": error
@@ -42,5 +38,5 @@ def list_s3_bucket(event, _context):
     return {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(response_body)
     }

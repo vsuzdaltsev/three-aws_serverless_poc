@@ -1,13 +1,18 @@
 import json
+import os
 import uuid
 
 import boto3
 
 
-EXPIRATION = 3600
+LINK_EXPIRATION = os.getenv('LINK_EXPIRATION') or 3600
 
 
 def upload_to_s3_bucket(event, _context):
+    """
+    Payload example:
+        --data '{"bucket_name": "uniqnamedbucket"}'
+    """
     client = boto3.client('s3')
     upload_key = uuid.uuid4().hex
 
@@ -16,17 +21,17 @@ def upload_to_s3_bucket(event, _context):
 
     presigned_url = client.generate_presigned_url(
         ClientMethod='put_object',
-        ExpiresIn=EXPIRATION,
+        ExpiresIn=LINK_EXPIRATION,
         Params={
             'Bucket': bucket,
             'Key': upload_key
         }
     )
 
-    body = {"upload_url": presigned_url, "expires": presigned_url.split("=")[-1]}
+    response_body = {"upload_url": presigned_url, "expires": presigned_url.split("=")[-1]}
 
     return {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(response_body)
     }
