@@ -73,7 +73,7 @@ $ inv serverless.rebuild-container
 $ inv serverless.deploy
 ```
 
-### Launching the application in offline mode
+### Launching and removing the application in offline mode
 
 #### Run offline api gateway emulator:
 
@@ -98,15 +98,13 @@ $ curl localhost:3000
 }
 ```
 
-### Stopping offline api gateway emulator:
-
-#### Stop and remove serverless container
+#### Stopping and removing offline api gateway emulator:
 
 ```
 $ inv serverless.stop-container
 ```
 
-#### Run demo script
+### Run demo script
 
 This will do the following:
 
