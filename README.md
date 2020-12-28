@@ -15,7 +15,7 @@ The following software is to be installed to start:
 - `pipenv`
 - `docker` & `docker-compose`
 
-### Environment setup
+### Environment setup (Linux and macOS)
 
 #### Prepare python environment:
 
@@ -67,7 +67,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 $ inv serverless.rebuild-container
 ```
 
-### Deployment
+### Deploy
 
 ```
 $ inv serverless.deploy
@@ -75,7 +75,7 @@ $ inv serverless.deploy
 
 ### Launching the application in offline mode
 
-#### Run fake api gateway:
+#### Run offline api gateway emulator:
 
 ```
 $ inv serverless.offline
@@ -98,6 +98,14 @@ $ curl localhost:3000
 }
 ```
 
+### Stopping offline api gateway emulator:
+
+#### Stop and remove serverless container
+
+```
+$ inv serverless.stop-container
+```
+
 #### Run demo script
 
 This will do the following:
@@ -105,7 +113,7 @@ This will do the following:
 * Create s3 bucket
 * Generate several random files
 * Upload them concurrently to s3
-* In order to utilize real API Gateway and Lambdas instead of locally running mocks, set the proper endpoint and token (
+* In order to utilize API Gateway and Lambdas set endpoint and token (
   env: TEST_POC_API_KEY, BASE_URI). They can be found in the output of `inv serverless.info` command.
 
 ```
@@ -127,12 +135,4 @@ curl -X GET  http://localhost:3000/prod/poc/list_s3_bucket/uniqnamedbucket -H "x
 
 ```
 $ inv serverless.remove
-```
-
-### Stopping container
-
-#### Stop and remove serverless container
-
-```
-$ inv serverless.stop-container
 ```
