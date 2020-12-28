@@ -17,6 +17,8 @@ The following software is to be installed to start:
 
 ### Environment setup
 
+(Linux or macOS, minor changes in Windows)
+
 #### Prepare python environment:
 
 ```
@@ -73,9 +75,9 @@ $ inv serverless.rebuild-container
 $ inv serverless.deploy
 ```
 
-### Launching the application in offline mode
+### Launching and stopping the application in offline mode
 
-#### Run fake api gateway:
+#### Run offline api gateway emulator:
 
 ```
 $ inv serverless.offline
@@ -98,21 +100,35 @@ $ curl localhost:3000
 }
 ```
 
-#### Run demo script
+#### Stop and remove offline api gateway emulator:
+
+```
+$ inv serverless.stop-container
+```
+
+### Run demo script
 
 This will do the following:
 
 * Create s3 bucket
 * Generate several random files
 * Upload them concurrently to s3
-* In order to utilize real API Gateway and Lambdas instead of locally running mocks, set the proper endpoint and token (
-  env: TEST_POC_API_KEY, BASE_URI). They can be found in the output of `inv serverless.info` command.
+* In order to utilize API Gateway and Lambdas set endpoint and token (env: TEST_POC_API_KEY, env: BASE_URI). They can be
+  found in the output of `inv serverless.info` command.
 
 ```
 $ python demo.py
 ```
 
 NB: do not forget to remove test s3 bucket!
+
+#### cURL examples
+
+```
+curl -X POST http://localhost:3000/prod/poc/create_s3_bucket -H 'x-api-key: <key>' --data '{"region": "us-east-1", "bucket_name": "uniqnamedbucket"}'
+curl -X POST http://localhost:3000/prod/poc/upload_to_s3_bucket -H 'x-api-key: <key>' --data '{"bucket_name": "uniqnamedbucket"}'
+curl -X GET  http://localhost:3000/prod/poc/list_s3_bucket/uniqnamedbucket -H "x-api-key: <key>"
+```
 
 ### Application removal
 
