@@ -15,7 +15,9 @@ The following software is to be installed to start:
 - `pipenv`
 - `docker` & `docker-compose`
 
-### Environment setup (Linux and macOS)
+### Environment setup
+
+(Linux or macOS, minor changes in Windows)
 
 #### Prepare python environment:
 
@@ -67,13 +69,13 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 $ inv serverless.rebuild-container
 ```
 
-### Deploy
+### Deployment
 
 ```
 $ inv serverless.deploy
 ```
 
-### Launching and removing the application in offline mode
+### Launching and stopping the application in offline mode
 
 #### Run offline api gateway emulator:
 
@@ -98,7 +100,7 @@ $ curl localhost:3000
 }
 ```
 
-#### Stopping and removing offline api gateway emulator:
+#### Stop and remove offline api gateway emulator:
 
 ```
 $ inv serverless.stop-container
@@ -111,8 +113,8 @@ This will do the following:
 * Create s3 bucket
 * Generate several random files
 * Upload them concurrently to s3
-* In order to utilize API Gateway and Lambdas set endpoint and token (
-  env: TEST_POC_API_KEY, BASE_URI). They can be found in the output of `inv serverless.info` command.
+* In order to utilize API Gateway and Lambdas set endpoint and token (env: TEST_POC_API_KEY, env: BASE_URI). They can be
+  found in the output of `inv serverless.info` command.
 
 ```
 $ python demo.py
@@ -120,7 +122,8 @@ $ python demo.py
 
 NB: do not forget to remove test s3 bucket!
 
-#### cURL example
+#### cURL examples
+
 ```
 curl -X POST http://localhost:3000/prod/poc/create_s3_bucket -H 'x-api-key: <key>' --data '{"region": "us-east-1", "bucket_name": "uniqnamedbucket"}'
 curl -X POST http://localhost:3000/prod/poc/upload_to_s3_bucket -H 'x-api-key: <key>' --data '{"bucket_name": "uniqnamedbucket"}'
@@ -133,4 +136,12 @@ curl -X GET  http://localhost:3000/prod/poc/list_s3_bucket/uniqnamedbucket -H "x
 
 ```
 $ inv serverless.remove
+```
+
+### Stopping container
+
+#### Stop and remove serverless container
+
+```
+$ inv serverless.stop-container
 ```
