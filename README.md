@@ -53,7 +53,7 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 
 ```
 
-#### Make sure docker is running
+#### Make sure Docker is running
 
 ```
 $ docker ps
