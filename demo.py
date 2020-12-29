@@ -14,7 +14,7 @@ FILES_NUMBER = 10
 FILE_SIZE = 1024 * 1  # 1024 = 1Mb
 
 
-API_KEY = os.getenv('TEST_POC_API_KEY')
+API_KEY = os.getenv('TEST_POC_API_KEY') or FAKE_API_KEY
 BASE_URI = os.getenv('BASE_URI') or f"http://localhost:{FAKE_API_PORT}/prod/poc"
 REGION = 'us-east-1'
 TEST_BUCKET = 'uniqnamedbucket5'
