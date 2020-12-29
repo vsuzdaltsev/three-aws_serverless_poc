@@ -9,7 +9,7 @@
 - [Run demo script](#demo)
 - [cURL examples](#examples)
 - [Application removal](#removal)
-- [Stopping containerl](#stop)
+- [Stopping container](#stop)
 
 ## LCM
 
