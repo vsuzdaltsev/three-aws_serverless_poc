@@ -1,8 +1,19 @@
 # AWS Serverless POC
 
+## Table of contents:
+
+- [Prerequisites](#prerequisites)
+- [Environment setup](#env_setup)
+- [Deployment](#deployment)
+- [Launching and stopping the application in offline mode](#launch)
+- [Run demo script](#demo)
+- [cURL examples](#examples)
+- [Application removal](#removal)
+- [Stopping containerl](#stop)
+
 ## LCM
 
-### Prerequisites
+### Prerequisites <div id='prerequisites'/>
 
 Small demo application which incorporates AWS API Gateway and several AWS Lambdas behind it. It has been tested with
 macOS, but should work under Linux & Windows as well.
@@ -15,7 +26,7 @@ The following software is to be installed to start:
 - `pipenv`
 - `docker` & `docker-compose`
 
-### Environment setup
+### Environment setup <div id='env_setup'/>
 
 (Linux or macOS. In Windows minor changes needed.)
 
@@ -69,13 +80,13 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 $ inv serverless.rebuild-container
 ```
 
-### Deployment
+### Deployment <div id='deployment'/>
 
 ```
 $ inv serverless.deploy
 ```
 
-### Launching and stopping the application in offline mode
+### Launching and stopping the application in the offline mode <div id='launch'/>
 
 #### Run offline api gateway emulator:
 
@@ -106,7 +117,7 @@ $ curl localhost:3000
 $ inv serverless.stop-container
 ```
 
-### Run demo script
+### Run demo script <div id='demo'/>
 
 This will do the following:
 
@@ -122,7 +133,7 @@ $ python demo.py
 
 NB: do not forget to remove test s3 bucket!
 
-### cURL examples
+### cURL examples <div id='examples'/>
 
 * In the offline mode:
 
@@ -140,7 +151,7 @@ $ curl -X POST http://[API GATEWAY ENGPOINT]/prod/poc/upload_to_s3_bucket -H 'x-
 $ curl -X GET  http://[API GATEWAY ENGPOINT]/prod/poc/list_s3_bucket/uniqnamedbucket -H "x-api-key: <real key>"
 ```
 
-### Application removal
+### Application removal <div id='removal'/>
 
 #### Remove application along with all related resources
 
@@ -148,7 +159,7 @@ $ curl -X GET  http://[API GATEWAY ENGPOINT]/prod/poc/list_s3_bucket/uniqnamedbu
 $ inv serverless.remove
 ```
 
-### Stopping container
+### Stopping container <div id='stop'/>
 
 #### Stop and remove serverless container
 
