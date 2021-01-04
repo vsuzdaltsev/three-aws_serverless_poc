@@ -57,7 +57,7 @@ Available tasks:
 
 ```
 
-#### Export AWS credentials to authorize serverless
+#### Export AWS credentials to authorize serverless (macOS and linux):
 
 ```
 $ export AWS_REGION="[region here]"
@@ -66,7 +66,7 @@ $ export AWS_SECRET_ACCESS_KEY="[secret access key here]"
 
 ```
 
-#### Make sure Docker is running
+#### Make sure Docker is running:
 
 ```
 $ docker ps
@@ -153,7 +153,7 @@ $ curl -X GET  http://[API GATEWAY ENGPOINT]/prod/poc/list_s3_bucket/uniqnamedbu
 
 ### Application removal <div id='removal'/>
 
-#### Remove application along with all related resources
+#### Remove application along with all related resources:
 
 ```
 $ inv serverless.remove
@@ -161,7 +161,7 @@ $ inv serverless.remove
 
 ### Stopping container <div id='stop'/>
 
-#### Stop and remove serverless container
+#### Stop and remove the serverless container:
 
 ```
 $ inv serverless.stop-container
