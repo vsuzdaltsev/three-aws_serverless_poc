@@ -93,15 +93,16 @@ def info(c):
 
 
 ns = Collection()
+
 local = Collection('local')
 serverless = Collection('serverless')
 
 local.add_task(autopep8, 'autopep8')
+
 serverless.add_task(deploy, 'deploy')
 serverless.add_task(remove, 'remove')
 serverless.add_task(info, 'info')
 serverless.add_task(offline, 'offline')
-
 serverless.add_task(restart_build_container, 'rebuild_container')
 serverless.add_task(remove_build_container, 'stop_container')
 

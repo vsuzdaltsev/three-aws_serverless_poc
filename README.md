@@ -13,6 +13,8 @@
 
 ## LCM
 
+![AWS Solution](./docs/aws_poc_image.png)
+
 ### Prerequisites <div id='prerequisites'/>
 
 Small demo application which incorporates AWS API Gateway and several AWS Lambdas behind it. It's deployment has been
