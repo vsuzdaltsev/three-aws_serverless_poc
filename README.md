@@ -15,8 +15,8 @@
 
 ### Prerequisites <div id='prerequisites'/>
 
-Small demo application which incorporates AWS API Gateway and several AWS Lambdas behind it. It has been tested with
-macOS, but should work under Linux & Windows as well.
+Small demo application which incorporates AWS API Gateway and several AWS Lambdas behind it. It's deployment has been
+tested with macOS, but should work under Linux & Windows as well.
 
 #### Software requirements
 
