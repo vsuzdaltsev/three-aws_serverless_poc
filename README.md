@@ -121,12 +121,16 @@ $ inv serverless.stop-container
 
 ### Run demo script <div id='demo'/>
 
+```
+$ inv serverless.offline
+```
+
 This will do the following:
 
 * Create s3 bucket
 * Generate several random files
 * Upload them concurrently to s3
-* In order to utilize API Gateway and Lambdas set the proper endpoint and token (env: TEST_POC_API_KEY, env: BASE_URI).
+* In order to utilize API Gateway and Lambdas, set the proper endpoint and token (env: TEST_POC_API_KEY, env: BASE_URI).
   They can be found in the output of `inv serverless.info` command.
 
 ```
