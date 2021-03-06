@@ -15,9 +15,9 @@ FILE_SIZE = 1024 * 1  # 1024 = 1Mb
 
 
 API_KEY = os.getenv('TEST_POC_API_KEY') or FAKE_API_KEY
-BASE_URI = os.getenv('BASE_URI') or f"http://localhost:{FAKE_API_PORT}/prod/poc"
+BASE_URL = os.getenv('BASE_URL') or f"http://localhost:{FAKE_API_PORT}/prod/poc"
 REGION = 'us-east-1'
-TEST_BUCKET = 'uniqnamedbucket5'
+TEST_BUCKET = 'uniqnamedbucket6'
 HEADERS = {'x-api-key': API_KEY}
 
 
@@ -38,7 +38,7 @@ def generate_random_files(names):
 
 def create_test_bucket(bucket):
     data = json.dumps({"region": REGION, "bucket_name": bucket})
-    uri = f"{BASE_URI}/create_s3_bucket"
+    uri = f"{BASE_URL}/create_s3_bucket"
     response = requests.request("POST", url=uri, headers=HEADERS, data=data)
     content = json.loads(response.content)
     return content
@@ -46,7 +46,7 @@ def create_test_bucket(bucket):
 
 def upload_link(bucket_name):
     data = json.dumps({"bucket_name": bucket_name})
-    uri = f"{BASE_URI}/upload_to_s3_bucket"
+    uri = f"{BASE_URL}/upload_to_s3_bucket"
     response = requests.request("POST", url=uri, headers=HEADERS, data=data)
     content = json.loads(response.content)
     return content
@@ -67,7 +67,7 @@ def go_thread_pool(files):
 if __name__ == "__main__":
 
     print(f">> HEADERS: {HEADERS}")
-    print(f">> BASE_URI: {BASE_URI}")
+    print(f">> BASE_URL: {BASE_URL}")
 
     temp_dir = create_temp_dir(f"{uuid.uuid4().hex}_temp")
     random_names = [f"{temp_dir}/{uuid.uuid4().hex}" for x in range(FILES_NUMBER)]

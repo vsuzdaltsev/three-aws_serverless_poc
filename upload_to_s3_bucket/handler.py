@@ -32,9 +32,6 @@ def upload_to_s3_bucket(event, _context):
 
     return {
         "isBase64Encoded": False,
-        "headers": {
-            "Location": presigned_url
-        },
-        "statusCode": 302,
+        "statusCode": 200,
         "body": json.dumps(response_body),
     }
