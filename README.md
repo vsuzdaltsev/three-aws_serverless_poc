@@ -152,9 +152,9 @@ $ curl -X GET  http://localhost:3000/prod/poc/list_s3_bucket/uniqnamedbucket -H 
 * Utilizing real API Gateway:
 
 ```
-$ curl -X POST http://[API GATEWAY ENGPOINT]/prod/poc/create_s3_bucket -H 'x-api-key: <real key>' --data '{"region": "us-east-1", "bucket_name": "uniqnamedbucket"}'
-$ curl -X POST http://[API GATEWAY ENGPOINT]/prod/poc/upload_to_s3_bucket -H 'x-api-key: <real key>' --data '{"bucket_name": "uniqnamedbucket"}'
-$ curl -X GET  http://[API GATEWAY ENGPOINT]/prod/poc/list_s3_bucket/uniqnamedbucket -H "x-api-key: <real key>"
+$ curl -X POST https://[API GATEWAY ENDPOINT]/prod/poc/create_s3_bucket -H 'x-api-key: <real key>' --data '{"region": "us-east-1", "bucket_name": "uniqnamedbucket"}'
+$ curl -X POST https://[API GATEWAY ENDPOINT]/prod/poc/upload_to_s3_bucket -H 'x-api-key: <real key>' --data '{"bucket_name": "uniqnamedbucket"}'
+$ curl -X GET  https://[API GATEWAY ENDPOINT]/prod/poc/list_s3_bucket/uniqnamedbucket -H "x-api-key: <real key>"
 ```
 
 ### Application removal <div id='removal'/>
